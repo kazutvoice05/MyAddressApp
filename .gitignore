@@ -67,4 +67,4 @@ node_modules/
 .env
 
 # Confidentials
-src/main.js
+src/config/firebaseEnv.js
