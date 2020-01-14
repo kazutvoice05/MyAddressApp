@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-cloak>
     <v-app-bar
       app
       color="primary"
@@ -18,14 +18,16 @@
 
     <v-content>
       <v-container fluid fill-height align-start>
-        <router-view/>
+        <router-view v-show="!$store.state.overlay" />
+        <v-overlay v-show="$store.state.overlay">
+          <v-progress-circular indeterminate color="primary" />
+        </v-overlay>
       </v-container>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import firebase from 'firebase'
 import { mapActions } from 'vuex'
 import SideNav from './components/SiteNav'
 export default {
@@ -34,26 +36,22 @@ export default {
     SideNav,
   },
   created () {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setLoginUser(user);
-        this.fetchAddresses();
-        if (this.$router.currentRoute.name === 'home') {
-          this.$router.push({ name: 'addresses' });
-        }
-      } else {
-        this.deleteLoginUser();
-        if (this.$router.currentRoute.name !== 'home') {
-          this.$router.push({ name: 'home' });
-        }
-      }
-    })
   },
   data: () => ({
     //
   }),
   methods: {
-    ...mapActions(['toggleSideMenu', 'setLoginUser', 'logout', 'deleteLoginUser', 'fetchAddresses'])
+    ...mapActions(['toggleSideMenu', 'setLoginUser', 'logout', 'deleteLoginUser', 'showOverlay', 'hideOverlay'])
   },
 };
 </script>
+
+<style scoped lang="scss">
+a {
+    text-decoration: none;
+}
+
+[v-cloak] {
+    display: none;
+}
+</style>

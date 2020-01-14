@@ -7,7 +7,7 @@
       </v-flex>
 
       <v-flex xs12 mt-5>
-        <v-btn color="info" @click="login">
+        <v-btn color="info" @click="loginWithGoogle">
           Login with your Google account
         </v-btn>
       </v-flex>
@@ -20,6 +20,10 @@ import { mapActions } from 'vuex'
 export default {
   name: 'home',
   methods: {
+    loginWithGoogle() {
+      this.login();
+      this.$router.push({ name: 'loading' });
+    },
     ...mapActions(['login'])
   }
 }

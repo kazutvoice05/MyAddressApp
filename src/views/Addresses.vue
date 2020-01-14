@@ -1,5 +1,5 @@
 <template>
-    <v-container text-xs-center justify-center>
+    <v-container text-xs-center v-show="!$store.state.overlay && this.addresses !== []">
         <v-layout row wrap>
             <v-flex xs12 justify-center>
                 <h1>連絡先一覧</h1>
@@ -36,10 +36,28 @@
 </template>>
 
 <script>
+/*eslint no-console: "off"*/
 import { mapActions } from 'vuex'
+import firebase from 'firebase'
 export default {
     created () {
-        this.addresses = this.$store.state.addresses;
+        this.showOverlay();
+        this.unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                this.setLoginUser(user);
+                await this.fetchAddresses();
+                this.addresses = this.$store.state.addresses;
+            } else {
+                this.deleteLoginUser();
+                if (this.$router.currentRoute.name !== 'home'){
+                    this.$router.push({ name: 'home' });
+                }
+            }
+            this.hideOverlay();
+        });
+    },
+    beforeDestroy () {
+        this.unsubscribe();
     },
     data() {
         return {
@@ -59,7 +77,7 @@ export default {
                 this.deleteAddress({ id })
             }
         },
-        ...mapActions(['deleteAddress'])
+        ...mapActions(['deleteAddress', 'showOverlay', 'hideOverlay', 'fetchAddresses', 'setLoginUser', 'deleteLoginUser'])
     }
 }
 </script>

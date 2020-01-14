@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     drawer: false,
     addresses: [],
-    login_user: null
+    login_user: null,
+    overlay: false
   },
   mutations: {
     setLoginUser(state, user) {
@@ -33,6 +34,15 @@ export default new Vuex.Store({
       const index = state.addresses.findIndex(address => address.id === id);
 
       state.addresses.splice(index, 1)
+    },
+    clearAddresses (state) {
+      state.addresses = [];
+    },
+    showOverlay(state) {
+      state.overlay = true;
+    },
+    hideOverlay(state) {
+      state.overlay = false;
     }
   },
   actions: {
@@ -46,10 +56,15 @@ export default new Vuex.Store({
       firebase.auth().signOut();
     },
     async fetchAddresses ({ getters, commit }) {
-      const addresses = await firebase.firestore().collection(`users/${getters.uid}/addresses`).get();
-      addresses.forEach((address) => {
-        commit('addAddress', { id: address.id, address: address.data()} );
-      });
+      if (getters.uid !== null) {
+        const addresses = await firebase.firestore().collection(`users/${getters.uid}/addresses`).get();
+        commit('clearAddresses');
+        addresses.forEach((address) => {
+          commit('addAddress', { id: address.id, address: address.data()} );
+        });
+      } else {
+        throw new Error("user id is null.");
+      }
     },
     login() {
       const google_auth_provider = new firebase.auth.GoogleAuthProvider()
@@ -76,6 +91,12 @@ export default new Vuex.Store({
         commit('deleteAddress', { id });
       }
     },
+    showOverlay({ commit }) {
+      commit('showOverlay');
+    },
+    hideOverlay({ commit }) {
+      commit('hideOverlay');
+    }
   },
   getters: {
     userName: state => state.login_user ? state.login_user.displayName : '',
