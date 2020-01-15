@@ -91,6 +91,9 @@ export default new Vuex.Store({
         commit('deleteAddress', { id });
       }
     },
+    clearAddresses({ commit }) {
+      commit('clearAddresses');
+    },
     showOverlay({ commit }) {
       commit('showOverlay');
     },

@@ -45,11 +45,11 @@ export default {
         }
     },
     methods: {
-        submit() {
+        async submit() {
             if (this.$route.params.address_id) {
-                this.updateAddress({ id: this.$route.params.address_id, address: this.address});
+                await this.updateAddress({ id: this.$route.params.address_id, address: this.address});
             } else {
-                this.addAddress(this.address);
+                await this.addAddress(this.address);
             }
             this.$router.push({ name: 'address-list' });
             this.address = {}
