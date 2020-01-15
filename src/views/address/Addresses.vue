@@ -6,7 +6,7 @@
             </v-flex>
 
             <v-flex xs12 mt-5 ml-5>
-                <router-link :to="{ name: 'address_edit' }">
+                <router-link :to="{ name: 'address-edit' }">
                     <v-btn color="info">
                         連絡先追加
                     </v-btn>
@@ -18,7 +18,7 @@
                     <template v-slot:item.action="{ item }">
                         <div>
                             <span>
-                                <router-link :to="{ name: 'address_edit', params: { address_id: item.id }} ">
+                                <router-link :to="{ name: 'address-edit', params: { address_id: item.id }} ">
                                     <v-icon small class="mr-2">mdi-checkbox-marked-outline</v-icon>
                                 </router-link>
                             </span>

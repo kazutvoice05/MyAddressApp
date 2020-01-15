@@ -32,7 +32,7 @@ export default {
     data: function () {
         return {
             items: [
-                { title: '連絡先一覧', icon: 'mdi-menu', link: { name: 'addresses'} } 
+                { title: '連絡先一覧', icon: 'mdi-menu', link: { name: 'address-list'} } 
             ]
         }
     },

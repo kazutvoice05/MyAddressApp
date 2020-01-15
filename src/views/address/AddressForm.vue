@@ -14,7 +14,7 @@
                             <v-text-field v-model="address.email" label="メールアドレス"></v-text-field>
                             <v-text-field v-model="address.address" label="住所"></v-text-field>
                             <div class="text-center">
-                                <v-btn @click="$router.push({ name: 'addresses' })">Cancel</v-btn>
+                                <v-btn @click="$router.push({ name: 'address-list' })">Cancel</v-btn>
                                 <v-btn color="info" @click="submit">保存</v-btn>
                             </div>
                         </v-form>
@@ -36,7 +36,7 @@ export default {
         if (address) {
             this.address = address
         } else {
-            this.$router.push({ name: 'addresses' })
+            this.$router.push({ name: 'address-list' })
         }
     },
     data(){
@@ -51,7 +51,7 @@ export default {
             } else {
                 this.addAddress(this.address);
             }
-            this.$router.push({ name: 'addresses' });
+            this.$router.push({ name: 'address-list' });
             this.address = {}
         },
         ...mapActions(['addAddress', 'updateAddress'])

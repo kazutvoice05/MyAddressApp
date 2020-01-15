@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Addresses from '../views/Addresses.vue'
-import AddressForm from '../views/AddressForm.vue'
 
-import AuthorizationRoutes from '../router/authorization'
+import AuthorizationRoutes from '../router/authorizationRoutes'
+import AddressRoutes from '../router/addressRoutes'
 
 Vue.use(VueRouter)
 
@@ -15,16 +14,6 @@ const routes = [
     component: Home
   },
   {
-    path: '/addresses',
-    name: 'addresses',
-    component: Addresses
-  },
-  {
-    path: '/addresses/:address_id?/edit',
-    name: 'address_edit',
-    component: AddressForm
-  },
-  {
     path: '/about',
     name: 'about',
     // route level code-splitting
@@ -32,7 +21,8 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
-  { ...AuthorizationRoutes } 
+  { ...AuthorizationRoutes },
+  { ...AddressRoutes }
 ]
 
 const router = new VueRouter({

@@ -20,7 +20,7 @@ export default {
     this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setLoginUser(user);
-        this.$router.push({ name: 'addresses' });
+        this.$router.push({ name: 'address-list' });
       } 
       this.loading = false
     });
