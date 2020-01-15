@@ -22,7 +22,7 @@ export default {
   methods: {
     loginWithGoogle() {
       this.login();
-      this.$router.push({ name: 'loading' });
+      this.$router.push({ name: 'auth-loading' });
     },
     ...mapActions(['login'])
   }
