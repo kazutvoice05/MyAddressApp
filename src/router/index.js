@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 
 import AuthorizationRoutes from '../router/authorizationRoutes'
 import AddressRoutes from '../router/addressRoutes'
+import UserRoutes from '../router/userRoutes'
 
 Vue.use(VueRouter)
 
@@ -22,7 +23,8 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   { ...AuthorizationRoutes },
-  { ...AddressRoutes }
+  { ...AddressRoutes },
+  { ...UserRoutes }
 ]
 
 const router = new VueRouter({

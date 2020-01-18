@@ -13,6 +13,21 @@
 
                 <v-divider></v-divider>
 
+                <v-list-group no-action value="true">
+                    <template v-slot:activator>
+                        <v-list-item-icon>
+                            <v-icon>mdi-account-circle</v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-title>MyAccount</v-list-item-title>
+                    </template>
+
+                    <v-list-item :to="{ name: 'user-profile' }">
+                        <v-list-item-title>Profile</v-list-item-title>
+                        <v-list-item-icon>
+                            <v-icon>mdi-account-box-outline</v-icon>
+                        </v-list-item-icon>
+                    </v-list-item>
+                </v-list-group>
                 <v-list-item v-for="(item, index) in items" :key='index' :to="item.link">
                     <v-list-item-icon>
                         <v-icon>{{ item.icon }}</v-icon>
@@ -38,6 +53,11 @@ export default {
     },
     computed: {
         ...mapGetters(['userName', 'photoURL'])
+    },
+    methods: {
+        toProfile () {
+            this.$router.push({ name: 'user-profile' });
+        },
     }
 
 }

@@ -1,7 +1,5 @@
 <template>
-  <v-container text-xs-center>
-      <div id="address">
-        <router-view></router-view>
-      </div>
+  <v-container>
+      <router-view></router-view>
   </v-container>
 </template>

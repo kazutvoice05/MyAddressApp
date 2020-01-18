@@ -92,7 +92,7 @@ export default new Vuex.Store({
       }
     },
     clearAddresses({ commit }) {
-      commit('clearAddresses');
+      commit('clearAddresses')
     },
     showOverlay({ commit }) {
       commit('showOverlay');
