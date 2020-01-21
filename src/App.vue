@@ -17,7 +17,7 @@
     <SideNav/>
 
     <v-content>
-      <v-container fluid fill-height align-start>
+      <v-container fluid>
         <router-view v-show="!$store.state.overlay" />
         <v-overlay v-show="$store.state.overlay">
           <v-progress-circular indeterminate color="primary" />

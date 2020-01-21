@@ -1,7 +1,7 @@
 <template>
-    <v-container text-xs-center v-show="!$store.state.overlay && this.addresses !== []">
+    <v-container v-show="!$store.state.overlay && this.addresses !== []">
         <v-layout row wrap>
-            <v-flex xs12 justify-center>
+            <v-flex>
                 <h1>連絡先一覧</h1>
             </v-flex>
 
