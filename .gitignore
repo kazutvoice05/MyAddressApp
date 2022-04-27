@@ -68,3 +68,5 @@ node_modules/
 
 # Confidentials
 src/config/firebaseEnv.js
+src/.env.local
+.env.local
